@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Math Quiz</title>
+</head>
+<body>
+	<h1>Math Quiz - Difficulty {{ difficulty }}</h1>
+	<p>Number of Questions: {{ num_questions }}</p>
+	<form method="post"  action="/quiz/results/">
+		{% csrf_token %}
+    <input type="hidden" name="difficulty" value="{{ difficulty }}">
+		<input type="hidden" name="num_questions" value="{{ num_questions }}">
+		{% for question in quiz_questions %}
+			<p>{{ question.num1 }} {{ question.operation }} {{ question.num2 }} = <input type="number" name="answer{{ question.id }}" required></p>
+		{% endfor %}
+		<button type="submit">Submit</button>
+	</form>
+</body>
+</html>
